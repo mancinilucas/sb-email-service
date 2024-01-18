@@ -21,12 +21,12 @@ public class EmailSenderController {
         this.emailSenderService = emailSenderService;
     }
 
-    @PostMapping
-    public ResponseEntity<String> sendEmail(@RequestBody EmailRequest request){
+    @PostMapping("/send")
+    public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest){
         try{
-            this.emailSenderService.sendEmail(request.to(), request.subject(), request.body());
-            return ResponseEntity.ok("email send successfully");
-        } catch (EmailServiceException e){
+            emailSenderService.sendEmail(emailRequest.to(), emailRequest.subject(), emailRequest.body());
+            return ResponseEntity.ok("email sent successfully");
+        } catch (EmailServiceException ex){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while sending email");
         }
     }

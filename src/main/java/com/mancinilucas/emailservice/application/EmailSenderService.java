@@ -1,7 +1,7 @@
 package com.mancinilucas.emailservice.application;
 
 import com.mancinilucas.emailservice.adapters.EmailSenderGateway;
-import com.mancinilucas.emailservice.core.EmailSenderUseCase;
+import com.mancinilucas.emailservice.core.cases.EmailSenderUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +11,12 @@ public class EmailSenderService implements EmailSenderUseCase {
     private final EmailSenderGateway emailSenderGateway;
 
     @Autowired
-    public EmailSenderService(EmailSenderGateway emailGateway){
-        this.emailSenderGateway = emailGateway;
+    public EmailSenderService(EmailSenderGateway emailSenderGateway) {
+        this.emailSenderGateway = emailSenderGateway;
     }
 
     @Override
-    public void sendEmail(String to, String subject, String body) {
-        this.emailSenderGateway.sendEmail(to, subject, body);
+    public void sendEmail(String toEmail, String subject, String body) {
+        emailSenderGateway.sendEmail(toEmail, subject, body);
     }
 }
